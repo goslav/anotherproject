@@ -1,0 +1,2 @@
+FLASK_APP=anotherblog.py
+FLASK_ENV=development
