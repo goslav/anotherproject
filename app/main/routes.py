@@ -162,7 +162,7 @@ def search():
     posts, total = Post.search(g.search_form.q.data, page,  
                                 current_app.config['POSTS_PER_PAGE'])
     next_url = url_for('main.search', q=g.search_form.q.data, page=page +1) \
-        if total > page * current_app.config['POSTS_PER_PAGE'] esle None
+        if total > page * current_app.config['POSTS_PER_PAGE'] else None
     prev_url = url_for('main.search', q=g.search_form.q.data, page=page - 1) \
         if total > 1 else None
     return render_template('search.html', title=_('Search'), posts=posts,

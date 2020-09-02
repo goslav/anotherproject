@@ -10,7 +10,7 @@ from app.models import User
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.auth.email import send_password_reset_email
-#from flask_babel import _, get_locale - moved to 'routes.py'
+from flask_babel import _
 #from guess_language import guess_language - moved to 'routes.py'
 #from app.translate import translate - moved to 'routes.py'
 
