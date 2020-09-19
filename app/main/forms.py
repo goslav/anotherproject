@@ -1,9 +1,20 @@
+<<<<<<< HEAD
 from flask import request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Length
 from flask_babel import _, lazy_gettext as _l
 from app.models import User
+=======
+#Let's ask Jorge about the app structure, as it is not entirely clear to me
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, TextAreaField
+#Removed PasswordField and BooleanField from the row above
+from wtforms.validators import DataRequired, ValidationError, Length
+#Removed Email, EqualTo from the row above
+from app.models import User
+from flask_babel import _, lazy_gettext as _l
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 
 
 class EditProfileForm(FlaskForm):
@@ -40,6 +51,7 @@ class SearchForm(FlaskForm):
             kwargs['formdata'] = request.args
         if 'csrf_enabled' not in kwargs:
             kwargs['csrf_enabled'] = False
+<<<<<<< HEAD
         super(SearchForm, self).__init__(*args, **kwargs)
 
 
@@ -47,3 +59,7 @@ class MessageForm(FlaskForm):
     message = TextAreaField(_l('Message'), validators=[
         DataRequired(), Length(min=1, max=140)])
     submit = SubmitField(_l('Submit'))
+=======
+        super(SearchForm, self).__init__(*args, **kwargs) 
+
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1

@@ -1,17 +1,27 @@
 <table class="table table-hover">
     <tr>
         <td width="70px">
+<<<<<<< HEAD
             <a href="{{ url_for('main.user', username=post.author.username) }}">
+=======
+            <a href="{{ url_for('user', username=post.author.username) }}">
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
                 <img src="{{ post.author.avatar(70) }}" />
             </a>
         </td>
         <td>
             {% set user_link %}
+<<<<<<< HEAD
                 <span class="user_popup">
                     <a href="{{ url_for('main.user', username=post.author.username) }}">
                         {{ post.author.username }}
                     </a>
                 </span>
+=======
+                <a href="{{ url_for('user', username=post.author.username) }}">
+                    {{ post.author.username }}
+                </a>
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
             {% endset %}
             {{ _('%(username)s said %(when)s',
                 username=user_link, when=moment(post.timestamp).fromNow()) }}

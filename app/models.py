@@ -1,5 +1,6 @@
 from datetime import datetime, time
 from hashlib import md5
+<<<<<<< HEAD
 import json
 from time import time
 from flask import current_app, url_for
@@ -12,6 +13,12 @@ import redis
 import rq
 import base64
 import os
+=======
+from time import time
+from flask import current_app
+import jwt
+from app.search import add_to_index, remove_from_index, query_index
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 
 
 class SearchableMixin(object):
@@ -24,7 +31,11 @@ class SearchableMixin(object):
         for i in range(len(ids)):
             when.append((ids[i], i))
         return cls.query.filter(cls.id.in_(ids)).order_by(
+<<<<<<< HEAD
             db.case(when, value=cls.id)), total
+=======
+            db.case(wneh, value=cls.id)), total
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 
     @classmethod
     def before_commit(cls, session):
@@ -41,7 +52,11 @@ class SearchableMixin(object):
                 add_to_index(obj.__tablename__, obj)
         for obj in session._changes['update']:
             if isinstance(obj, SearchableMixin):
+<<<<<<< HEAD
                 add_to_index(obj.__tablename__, obj)
+=======
+                add_to_index(obj, SearchableMixin)
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
         for obj in session._changes['delete']:
             if isinstance(obj, SearchableMixin):
                 remove_from_index(obj.__tablename__, obj)
@@ -56,6 +71,7 @@ db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
 db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
 
 
+<<<<<<< HEAD
 class PaginateAPIMixin(object):
     @staticmethod
     def to_collection_dict(query, page, per_page, endpoint, **kwargs):
@@ -79,6 +95,12 @@ class PaginateAPIMixin(object):
         }
         return data
 
+=======
+followers = db.Table('followers',
+    db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+)
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 
 followers = db.Table('followers',
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
@@ -93,6 +115,7 @@ class User(PaginateAPIMixin, UserMixin, db.Model):
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+<<<<<<< HEAD
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
     followed = db.relationship(
@@ -112,6 +135,13 @@ class User(PaginateAPIMixin, UserMixin, db.Model):
     tasks = db.relationship ('Task', backref='user', lazy='dynamic')
     token = db.Column(db.String(32), index=True, unique=True)
     token_expiration = db.Column(db.DateTime)
+=======
+    followed = db.relationship(
+        'User', secondary=followers, 
+        primaryjoin=(followers.c.follower_id == id),
+        secondaryjoin=(followers.c.followed_id == id),
+        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic')
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 
     def __repr__(self):
         return'<User {}>'.format(self.username)
@@ -160,6 +190,7 @@ class User(PaginateAPIMixin, UserMixin, db.Model):
             return
         return User.query.get(id)
 
+<<<<<<< HEAD
     def new_messages(self):
         last_read_time = self.last_message_read_time or datetime(1900, 1, 1)
         return Message.query.filter_by(recipient=self).filter(
@@ -233,17 +264,24 @@ class User(PaginateAPIMixin, UserMixin, db.Model):
         return user
 
 
+=======
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
 
+<<<<<<< HEAD
 
 class Post(SearchableMixin, db.Model):
     __searchable__ = ['body']
+=======
+class Post(SearchableMixin, db.Model):
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+<<<<<<< HEAD
     language = db.Column(db.String(5))
 
     def __repr__(self):
@@ -290,6 +328,13 @@ class Task(db.Model):
         job = self.get_rq_job()
         return job.meta.get('progress', 0) if job is not None else 100
 
+=======
+    language = db.Column(db.String(5)) 
+    __searchable__ = ['body']
+
+    def __repr__(self):
+        return'<Post {}>'.formt(self.body)
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 
 
 

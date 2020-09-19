@@ -17,8 +17,14 @@ def query_index(index, query, page, per_page):
     if not current_app.elasticsearch:
         return [], 0
     search = current_app.elasticsearch.search(
+<<<<<<< HEAD
         index=index,
         body={'query': {'multi_match': {'query': query, 'fields': ['*']}},
               'from': (page - 1) * per_page, 'size': per_page})
+=======
+        index=index, 
+        body={'query': {multi_match: {'query': query, 'fields': ['*']}},
+              'from': (page-1) * per_page, 'size': per_page})
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
     ids = [int(hit['_id']) for hit in search['hits']['hits']]
     return ids, search['hits']['total']['value']

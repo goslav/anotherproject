@@ -15,3 +15,8 @@
 2020-08-21 18:02:15,553 INFO: Anotherblog startup [in C:\Users\slavk\anotherblog\app\__init__.py:70]
 2020-08-21 18:10:43,991 INFO: Anotherblog startup [in C:\Users\slavk\anotherblog\app\__init__.py:70]
 2020-08-21 18:13:18,979 INFO: Anotherblog startup [in C:\Users\slavk\anotherblog\app\__init__.py:70]
+<<<<<<< HEAD
+=======
+2020-08-27 18:02:34,549 INFO: Anotherblog startup [in c:\Users\slavk\anotherblog\app\__init__.py:74]
+2020-08-27 18:02:49,411 INFO: Anotherblog startup [in c:\Users\slavk\anotherblog\app\__init__.py:74]
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1

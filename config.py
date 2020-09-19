@@ -20,6 +20,9 @@ class Config(object):
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
     ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
     LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+<<<<<<< HEAD
     REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'
 
+=======
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
     

@@ -1,7 +1,11 @@
 {% extends 'bootstrap/base.html' %}
 
 {% block title %}
+<<<<<<< HEAD
     {% if title %}{{ title }} - Microblog{% else %}{{ _('Welcome to Microblog') }}{% endif %}
+=======
+    {% if title %}{{ title }} - Anotherblog{% else %}{{ _('Welcome to Anotherblog') }}{% endif %}
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 {% endblock %}
 
 {% block navbar %}
@@ -14,7 +18,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+<<<<<<< HEAD
                 <a class="navbar-brand" href="{{ url_for('main.index') }}">Microblog</a>
+=======
+                <a class="navbar-brand" href="{{ url_for('main.index') }}">Anotherblog</a>    <nav class="navbar navbar-default">
+            <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('main.index') }}">Anotherblog</a>
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -22,9 +39,17 @@
                     <li><a href="{{ url_for('main.explore') }}">{{ _('Explore') }}</a></li>
                 </ul>
                 {% if g.search_form %}
+<<<<<<< HEAD
                 <form class="navbar-form navbar-left" method="get" action="{{ url_for('main.search') }}">
                     <div class="form-group">
                         {{ g.search_form.q(size=20, class='form-control', placeholder=g.search_form.q.label.text) }}
+=======
+                <form class="navbar-form navbar-left" method="get"
+                        action="{{  url_for('main.search') }}">
+                    <div class="form-group">
+                        {{ g.search_form.q(size=20, class='form-control',
+                            placeholder=g.search_form.q.label.text) }}
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
                     </div>
                 </form>
                 {% endif %}
@@ -32,6 +57,7 @@
                     {% if current_user.is_anonymous %}
                     <li><a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a></li>
                     {% else %}
+<<<<<<< HEAD
                     <li>
                         <a href="{{ url_for('main.messages') }}">
                             {{ _('Messages') }}
@@ -43,6 +69,8 @@
                             </span>                            
                         </a>
                     </li>
+=======
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
                     <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
                     <li><a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li>
                     {% endif %}
@@ -54,6 +82,7 @@
 
 {% block content %}
     <div class="container">
+<<<<<<< HEAD
         {% if current_user.is_authenticated %}
         {% with tasks = current_user.get_tasks_in_progress() %}
         {% if tasks %}
@@ -66,6 +95,8 @@
         {% endif %}
         {% endwith %}
         {% endif %}
+=======
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}
@@ -86,9 +117,15 @@
     <script>
         function translate(sourceElem, destElem, sourceLang, destLang) {
             $(destElem).html('<img src="{{ url_for('static', filename='loading.gif') }}">');
+<<<<<<< HEAD
             $.post('/translate', {
                 text: $(sourceElem).text(),
                 source_language: sourceLang,
+=======
+            $.post('/translate' {
+                text: $(sourceElem).text(),
+                source_language: sourceLang, 
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
                 dest_language: destLang
             }).done(function(response) {
                 $(destElem).text(response['text'])
@@ -96,6 +133,7 @@
                 $(destElem).text("{{ _('Error: Could not contact server.') }}");
             });
         }
+<<<<<<< HEAD
         $(function () {
             var timer = null;
             var xhr = null;
@@ -169,5 +207,7 @@
             }, 10000);         
         });
         {% endif %}
+=======
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
     </script>
 {% endblock %}

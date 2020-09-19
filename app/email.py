@@ -8,6 +8,7 @@ def send_async_email(app, msg):
         mail.send(msg)
 
 
+<<<<<<< HEAD
 def send_email(subject, sender, recipients, text_body, html_body,
                 attachments=None, sync=False):
     msg = Message(subject, sender=sender, recipients=recipients)
@@ -21,5 +22,13 @@ def send_email(subject, sender, recipients, text_body, html_body,
     else:
         Thread(target=send_async_email,
             args=(current_app.get_current_object(), msg)).start()
+=======
+def send_email(subject, sender, recipients, text_body, html_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    msg.html = html_body
+    Thread(target=send_async_email, 
+          args=(current_app._get_current_object(), msg)).start()
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 
 

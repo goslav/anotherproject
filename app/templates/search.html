@@ -1,20 +1,35 @@
 {% extends "base.html" %}
 
 {% block app_content %}
+<<<<<<< HEAD
     <h1>{{ _('Search Results') }}</h1>
+=======
+    <h1>{{_('Serch Results') }}</h1>
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
     {% for post in posts %}
         {% include '_post.html' %}
     {% endfor %}
     <nav aria-label="...">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
+<<<<<<< HEAD
                 <a href="{{ prev_url or '#' }}">
                     <span aria-hidden="true">&larr;</span> {{ _('Previous results') }}
+=======
+                <a href="{{ prev_url or '#' }}"
+                    <span aria-hidden="true">&larr;</span>
+                    {{ _('Previous results') }}
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
                 </a>
             </li>
             <li class="next{% if not next_url %} disabled{% endif %}">
                 <a href="{{ next_url or '#' }}">
+<<<<<<< HEAD
                     {{ _('Next results') }} <span aria-hidden="true">&rarr;</span>
+=======
+                    {{ _('Next results') }}
+                    <span aria-hidden="true">&rarr;</span>
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
                 </a>
             </li>
         </ul>

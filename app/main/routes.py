@@ -1,5 +1,6 @@
 #This file is a part of a bigger file called routes.py that was under the app folder.
 #The other section of the bigger file is in the 'auth' folder
+<<<<<<< HEAD
 from flask import render_template, flash, redirect, url_for, request, g, \
     jsonify, current_app
 from app import db
@@ -12,6 +13,19 @@ from flask_babel import _, get_locale
 from guess_language import guess_language
 from app.translate import translate
 from flask_login import current_user, login_required
+=======
+from datetime import datetime
+from flask import render_template, flash, redirect, url_for, request, g, \
+    jsonify, current_app
+from flask_login import current_user, login_required
+from flask_babel import _, get_locale
+from guess_language import guess_language
+from app import db
+from app.main.forms import EditProfileForm, EmptyForm, PostForm
+from app.models import User, Post
+from app.translate import translate
+from app.main import bp
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 
 
 #Replaced all instances of 'app' with 'bp'
@@ -20,10 +34,15 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
+<<<<<<< HEAD
         g.search_form = SearchForm()
     g.locale = str(get_locale())
 
 
+=======
+    g.locale = str(get_locale())
+
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 #'app.config' replaced with 'current_app.config'
 @bp.route('/', methods=['GET', 'POST'])
 @bp.route('/index', methods=['GET', 'POST'])
@@ -58,7 +77,11 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
     posts = user.posts.order_by(Post.timestamp.desc()).paginate(
+<<<<<<< HEAD
         page, current_app.config['POSTS_PER_PAGE'], False)
+=======
+        page, app.config['POSTS_PER_PAGE'], False)
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
     next_url = url_for('user', username=user.username, page=posts.next_num) \
         if posts.has_next else None
     prev_url = url_for('user', username=user.username, page=posts.prev_num) \
@@ -130,7 +153,11 @@ def unfollow(username):
 def explore():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.timestamp.desc()).paginate(
+<<<<<<< HEAD
         page, current_app.config['POSTS_PER_PAGE'], False)
+=======
+        page, app.config['POSTS_PER_PAGE'], False)
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
     next_url = url_for('main.explore', page=posts.next_num) \
         if posts.has_next else None
     prev_url = url_for('main.explore', page=posts.prev_num) \
@@ -146,6 +173,7 @@ def translate_text():
                                       request.form['source_language'],
                                       request.form['dest_language'])})
 
+<<<<<<< HEAD
 @bp.route('/user/<username>/popup')
 @login_required
 def user_popup(username):
@@ -187,12 +215,23 @@ def messages():
         if messages.has_prev else None
     return render_template('messages.html', messages=messages.items,
                             next_url=next_url, prev_url=prev_url)
+=======
+
+@bp.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
+        g.search_form = SearchForm()
+    g.locale = str(get_locale())
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
 
 
 @bp.route('/search')
 @login_required
 def search():
     if not g.search_form.validate():
+<<<<<<< HEAD
         return redirect(url_for('main.explore'))
     page = request.args.get('page', 1, type=int)
     posts, total = Post.search(g.search_form.q.data, page,
@@ -232,3 +271,15 @@ def notifications():
 
 
 
+=======
+        return redirect(url_for('main.exlopre'))
+    page = request.args.get('page', 1, type=int)
+    posts, total = Post.search(g.search_form.q.data, page,  
+                                current_app.config['POSTS_PER_PAGE'])
+    next_url = url_for('main.search', q=g.search_form.q.data, page=page +1) \
+        if total > page * current_app.config['POSTS_PER_PAGE'] else None
+    prev_url = url_for('main.search', q=g.search_form.q.data, page=page - 1) \
+        if total > 1 else None
+    return render_template('search.html', title=_('Search'), posts=posts,
+                            next_url=next_url, prev_url=prev_url)
+>>>>>>> 32bc1c50b0a5fb52100d141bd9045f3c4ff142f1
